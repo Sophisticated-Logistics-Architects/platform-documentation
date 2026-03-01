@@ -1,4 +1,4 @@
-# Plan de Dezvoltare — Replicare Platformă BursaTransport
+# Plan de Dezvoltare — Platformă Logistică (BursaTransport clone)
 > **2 Developeri | Claude Code (Sonnet 4.6 + Opus 4.6)**  
 > **Obiectiv:** Platformă production-ready, securizată, funcțională 1:1 cu BursaTransport
 
@@ -13,17 +13,25 @@
 | **Backend/API** | Astro API Routes + tRPC | Type-safe end-to-end, fără overhead |
 | **Bază de date** | PostgreSQL (Supabase) | Relațional, scalabil, hosted |
 | **ORM** | Prisma | Schema as code, migrații, type safety |
-| **Auth** | Lucia Auth / Better Auth | Compatibil Astro, session-based, 2FA |
-| **Storage fișiere** | Supabase Storage / S3 | Documente, avatare, PDF-uri |
-| **Email** | Resend + React Email | Tranzacțional, modern |
-| **SMS** | Twilio | Notificări SMS, 2FA |
-| **Plăți** | Stripe | Card, subscriptions, invoicing |
-| **Hărți** | Mapbox GL JS | Rute, pins, geocoding |
-| **Real-time** | Supabase Realtime / Pusher | Licitații live, notificări instant |
-| **Job queue** | pg-boss (pe Postgres) | SMS scheduled, expiry jobs |
-| **Deployment** | Netlify / Vercel (FE Astro) + Supabase (DB) | Zero-config, scalabil |
+| **Auth** | Lucia Auth | Compatibil Astro, session-based, 2FA |
+| **Storage fișiere** | Supabase Storage | Documente, avatare, PDF-uri |
+| **Email** | Resend + React Email | Tranzacțional + notificări (înlocuiește SMS) |
+| **Plăți** | Stripe | Card, subscriptions, RON/EUR |
+| **Hărți** | MapLibre GL JS + OpenStreetMap | 100% open-source, gratuit |
+| **Real-time** | Supabase Realtime | Licitații live, notificări instant |
+| **Job queue** | pg-boss (pe Postgres) | Expirare automată anunțuri |
+| **Deployment** | Netlify / Vercel + Supabase | Zero-config, scalabil |
 | **CI/CD** | GitHub Actions | Auto-deploy, teste automate |
-| **Monitoring** | Sentry + Vercel Analytics | Erori, performanță |
+| **Monitoring** | Sentry | Erori FE + BE |
+
+### Decizii finale confirmate
+- ✅ **Fără sistem de credite CRB** — plăți directe RON/EUR prin Stripe
+- ✅ **Fără SMS** — notificările se trimit prin email (Resend)
+- ✅ **Hărți open-source** — MapLibre GL JS + tile-uri OpenStreetMap (Gratuit)
+- ✅ **ANAF simulat în MVP** — mock response, integrare reală în v2
+- ✅ **Limbă**: RO + EN (i18n)
+- ✅ **Prețuri abonamente**: identice cu BursaTransport (în RON/EUR)
+- ⏳ **Branding / Nume platformă**: TBD
 
 ---
 
